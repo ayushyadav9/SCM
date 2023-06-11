@@ -1,16 +1,16 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="layout(content)">
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link rel="stylesheet" th:href="@{/css/style.css}" />
-    <title th:text="${title}">Smart Contact Manager</title>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
+	<title th:text="${title}">Smart Contact Manager</title>
+   
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   </head>
   <body>
 	<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary ">
@@ -21,14 +21,12 @@
 	
 	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	    <ul class="navbar-nav ml-auto">
-		    <li class="nav-item mx-3">
-			    <button onclick="paymentStart()" type="button" class="btn btn-outline-warning">Donate</button>    
-		    </li>
-	    
+		  <li class="nav-item mx-3">
+			  <button onclick="paymentStart()" type="button" class="btn btn-outline-warning">Donate</button>    
+		  </li>
 	      <li class="nav-item active">
 	        <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
 	      </li>
-	    
 	      <li class="nav-item">
 	        <a class="nav-link" th:href="@{/user/profile}" th:text="${user.name}"></a>
 	      </li>
@@ -50,7 +48,6 @@
 	</div>
 
 	<div class="content">
-		
 		<div th:replace="${content}"></div>
 	</div>
 	
@@ -64,20 +61,20 @@
 		function delContact(cid){
 			console.log(cid)
 			swal({
-				  title: "Are you sure?",
-				  text: "Once deleted, you will not be able to recover this contact!",
-				  icon: "warning",
-				  buttons: true,
-				  dangerMode: true,
+					title: "Are you sure?",
+					text: "Once deleted, you will not be able to recover this contact!",
+					icon: "warning",
+					buttons: true,
+					dangerMode: true,
 				})
 				.then((willDelete) => {
-				  if (willDelete) {
+					if (willDelete) {
 					window.location = "/user/contact/delete/"+cid
-				   
-				  } else {
-				    swal("Your contact is safe!");
-				  }
-				});
+					
+					} else {
+					swal("Your contact is safe!");
+					}
+			});
 		}
 	</script>
 	<script src="https://checkout.razorpay.com/v1/checkout.js"></script>

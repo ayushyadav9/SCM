@@ -11,7 +11,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="contact")
+@Table(name = "contact")
 public class Contact {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,14 +24,14 @@ public class Contact {
 	private String image;
 	@Column(length = 5000)
 	private String description;
-	
+
 	@ManyToOne
 	@JsonIgnore
 	private User user;
 
 	public Contact() {
 		super();
-		
+
 	}
 
 	public Contact(int cid, String name, String secondName, String work, String email, String phone, String image,
@@ -47,14 +47,13 @@ public class Contact {
 		this.description = description;
 		this.user = user;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Contact [cid=" + cid + ", name=" + name + ", secondName=" + secondName + ", work=" + work + ", email="
-				+ email + ", phone=" + phone + ", image=" + null + ", description=" + description + ", user=" + null
+				+ email + ", phone=" + phone + ", image=" + image + ", description=" + description + ", user=" + null
 				+ "]";
 	}
-
 
 	public int getCid() {
 		return cid;
@@ -127,5 +126,5 @@ public class Contact {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
 }

@@ -66,7 +66,6 @@ public class ForgotPasswordController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		return "forgot_password";
 	}
 	
@@ -80,7 +79,6 @@ public class ForgotPasswordController {
 			return "password_change_form";
 		}else {
 			session.setAttribute("message", new Message("You have entered wrong OTP! Please try again","danger"));
-			
 			return "verify_otp";
 		}
 	}
@@ -102,7 +100,5 @@ public class ForgotPasswordController {
 			e.printStackTrace();
 		}
 		return "password_change_form";
-		
-		
 	}
 }

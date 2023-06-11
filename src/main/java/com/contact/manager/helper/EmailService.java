@@ -37,7 +37,7 @@ public class EmailService {
 				return new PasswordAuthentication("rahuladwe4@gmail.com", "dkklfappdhgbvhda");
 			}
 		});
-//		session.setDebug(true);
+		//session.setDebug(true);
 		
 		//step 2: compose the message
 		MimeMessage m = new MimeMessage(session);

@@ -84,7 +84,5 @@ public class HomeController {
 			session.setAttribute("message", new Message("Something went wrong "+ e.getMessage(),"alert-danger"));
 			return "signup";
 		}
-		
-		
 	}
 }

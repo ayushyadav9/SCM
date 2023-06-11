@@ -35,6 +35,7 @@ public class SecurityConfig{
 	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+		
 		httpSecurity.authorizeHttpRequests()
 			.requestMatchers("/admin/**").hasRole("ADMIN")
 			.requestMatchers("/user/**").hasRole("USER")
@@ -45,12 +46,12 @@ public class SecurityConfig{
 			.loginProcessingUrl("/do-login")
 			.defaultSuccessUrl("/user/profile")
 			.and()
-			.csrf().disable();
+			.csrf()
+			.disable();
 		
 		httpSecurity.formLogin().defaultSuccessUrl("/user/profile",true);
 		
 		return httpSecurity.build();
-
 	}
 	
 }

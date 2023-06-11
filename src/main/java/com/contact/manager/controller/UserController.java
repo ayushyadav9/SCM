@@ -75,10 +75,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/process-contact")
-	public String processContact(@ModelAttribute Contact contact,
-								@RequestParam("profileImage") MultipartFile file, 
-								Principal principal, HttpSession session) {
-		
+	public String processContact(@ModelAttribute Contact contact, @RequestParam("profileImage") MultipartFile file, Principal principal, HttpSession session) {
 		try {
 			String username = principal.getName();
 			User user = this.userRepository.getUserByUserName(username);
@@ -93,13 +90,11 @@ public class UserController {
 				Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + fileName);
 				Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 			}
-			
 			contact.setUser(user);
 			
 			user.getContacts().add(contact);
 			this.userRepository.save(user);
 			session.setAttribute("message", new Message("Your Contact is added !","success"));
-			
 		} catch (Exception e) {
 			System.out.println("Error: "+e.getMessage());
 			session.setAttribute("message", new Message("Something went wrong!","danger"));
@@ -126,7 +121,6 @@ public class UserController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		return "normal/show_contacts";
 	}
 	
@@ -149,7 +143,6 @@ public class UserController {
 			e.printStackTrace();
 			model.addAttribute("title","Not Found - Smart Contact Manager");
 		}
-		
 		return "normal/contact_details";
 	}
 
@@ -174,7 +167,6 @@ public class UserController {
 			session.setAttribute("message", new Message("Not able to delete contact..","danger"));
 			e.printStackTrace();
 		}
-		
 		return "redirect:/user/show-contacts/0";
 	}
 	
@@ -192,10 +184,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/process-update")
-	public String updateContact(@ModelAttribute Contact contact,
-								@RequestParam("profileImage") MultipartFile file, 
-								Principal principal, HttpSession session) {
-		
+	public String updateContact(@ModelAttribute Contact contact, @RequestParam("profileImage") MultipartFile file, Principal principal, HttpSession session) {
 		try {
 			Contact oldContact = this.contactRepository.findById(contact.getCid()).get();
 			if(!file.isEmpty()) {

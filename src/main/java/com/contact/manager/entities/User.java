@@ -16,34 +16,30 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class User {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	
+
 	@NotBlank(message = "Name field is required")
-	@Size(min = 2,max = 20, message = "Minimum 2 and Maximum 20 characters are required")
+	@Size(min = 2, max = 20, message = "Minimum 2 and Maximum 20 characters are required")
 	private String name;
-	
+
 	@Column(unique = true)
 	private String email;
-	
 	private String password;
-	
 	private String role;
-	
 	private String imageUrl;
-	
+
 	@Column(length = 500)
 	private String about;
-	
 	private Boolean enabled;
-	
-	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
 	private List<Contact> contacts = new ArrayList<>();
-	
+
 	public User() {
 		super();
 	}
@@ -139,10 +135,10 @@ public class User {
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
-		return this.id==((Contact)obj).getCid();
+		return this.id == ((Contact) obj).getCid();
 	}
-	
-	
+
 }
