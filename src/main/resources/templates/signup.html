@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<section>
+	
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 offset-md-2">
+					<div class="my-card mt-2">
+						<div th:if="${session.message}" th:classappend="${'alert-' + session.message.type}" class="alert mr-4 text-center" role="alert">
+						  <span th:text="${session.message.content}"></span>
+							<th:block th:text="${@sessionHelper.removeMessage()}"> </th:block>
+						</div>
+						<div class="container text-center">
+							<img style="width:100px" th:src="@{/img/signup.png}"></img>	
+						</div>
+						<form novalidate th:action="@{do_register}" method="post" th:object="${user}">
+							<div class="form-group">
+							    <label for="name_field">Name</label>
+							    <input name="name" type="text" th:classappend="${#fields.hasErrors('name')?'is-invalid':''}" class="form-control" id="name_field" th:value="${user.name}" aria-describedby="emailHelp" placeholder="Enter name">
+							 	<div class="invalid-feedback" th:each="e:${#fields.errors('name')}" th:text="${e}"></div>
+							 </div>
+							 
+							 <div class="form-group">
+							    <label for="email_field">Email</label>
+							    <input name="email" type="email" class="form-control" id="email_field" th:value="${user.email}" aria-describedby="emailHelp" placeholder="Enter email">
+							 </div>
+							 <div class="form-group">
+							    <label for="password_field">Password</label>
+							    <input name="password" type="password" class="form-control" id="password_field" th:value="${user.password}" aria-describedby="emailHelp" placeholder="Enter password">
+							 </div>
+							 <div class="form-group">
+							    <textarea name="about" class="form-control" rows="6" id="about_field" th:value="${user.about}" aria-describedby="emailHelp" placeholder="Enter something about yourself"></textarea>
+							 </div>
+							 <div class="form-group form-check text-center">
+							    <input name="agreement" type="checkbox" class="form-check-input" id="agreement_field" aria-describedby="emailHelp">
+							    <label for="agreement_field">Accept Terms & Conditions</label>
+							 </div>
+							 <div class="container text-center">
+							 	<button class="btn bg-primary text-white">
+							 		Submit
+							 	</button>
+							 	<button class="btn btn-warning ">
+							 		Reset
+							 	</button>
+							 </div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	</section>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org" th:replace="~{normal/base::layout(~{::section})}">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<section>
+		<div th:if="${session.message}" th:classappend="${'alert-' + session.message.type}" class="alert mr-4 text-center" role="alert">
+		  <span th:text="${session.message.content}"></span>
+			<th:block th:text="${@sessionHelper.removeMessage()}"> </th:block>
+		</div>
+		<div class="card mr-4" th:if=${contacts}>
+		<i class="fas fa-bars m-3" onclick="toggleSideBar()"></i>
+			<div class="card-body">
+				<h1 class="text-center mb-3">Your Contacts</h1>
+				
+				<div class="search-container my-4">
+					<input onkeyup="search()" id="search-input" type="text" class="form-control" placeholder="Search your contacts" />
+					<div class="search-result">
+						
+					</div>
+				</div>
+				<div class="table-responsive">
+				<table class="table table-hover mt-3">
+				  <thead>
+				    <tr>
+				      <th scope="col">#</th>
+				      <th scope="col">Name</th>
+				      <th scope="col">Email</th>
+				      <th scope="col">Phone</th>
+				      <th scope="col">Action</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  
+				    <tr th:each="c:${contacts}">
+				      <th scope="row" th:text="SCM2023 + ${c.cid}"></th>
+				      <td>
+					      <img class="profile_image" src="" th:src="@{'/img/'+${c.image}}"/>
+					      <span th:text=${c.name}></span>
+				      </td>
+				      <td>
+				      	<a href="#" th:href="@{'/user/contact/'+${c.cid}}"><span th:text=${c.email}></span> </a>
+				      </td>
+				      <td th:text=${c.phone}></td>
+				      <td>
+				      <div style="display:flex;">
+				      	<i th:onclick="|delContact(${c.cid})|" class="fa fa-trash" style="margin:5px;cursor:pointer;"></i>
+				      	<form id="my_form" th:action="@{'/user/update-contact/' + ${c.cid}}" method="post">
+				      		<i onclick="document.getElementById('my_form').submit();" class="fa fa-edit ml-2" style="cursor:pointer;"></i>
+				      	</form>
+				      
+				      </div>
+				      </td>
+				    </tr>
+				    
+				  </tbody>
+				</table>
+				</div>
+				<div class="text-center">
+					<nav aria-label="Page navigation example">
+					  <ul class="pagination">
+					    <li th:if="${currentPage!=0}" class="page-item"><a class="page-link" th:href="@{'/user/show-contacts/'+${currentPage-1}}" href="#">Previous</a></li>
+					   
+					    <li th:classappend="${currentPage==i-1?'active':''}" th:each="i:${#numbers.sequence(1,totalPages)}" class="page-item">
+					    	<a th:href="@{'/user/show-contacts/'+${i-1}}" class="page-link" href="#"><span th:text=${i}></span></a>
+					    </li>
+				
+					    <li th:if="${currentPage+1!=totalPages}"  class="page-item"><a class="page-link" href="#" th:href="@{'/user/show-contacts/'+${currentPage+1}}">Next</a></li>
+					  </ul>
+					</nav>
+				</div>
+				
+			</div>
+		</div>
+		<div>
+		<div class="card mr-4" th:unless=${contacts}>
+			<i class="fas fa-bars m-3" onclick="toggleSideBar()"></i>
+			<div class="card-body">
+				<h1 class="text-center mb-3">You don't have contacts. Please add some from <a href="#" th:href="@{/user/add-contact}">here</a></h1>
+				</div>
+				</div>
+		</div>
+		<script>
+			$(document).ready(()=>{
+				$(".item").removeClass("activeTab");
+				$("#show-contact-link").addClass("activeTab");
+			});
+	</script>
+	</section>
+	
+</body>
+</html>

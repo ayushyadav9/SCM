@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org" th:replace="~{normal/base::layout(~{::section})}">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<section>
+	<div th:if="${session.message}" th:classappend="${'alert-' + session.message.type}" class="alert mr-4 text-center" role="alert">
+	  <span th:text="${session.message.content}"></span>
+		<th:block th:text="${@sessionHelper.removeMessage()}"> </th:block>
+	</div>
+	<div class="card mr-4" >
+			<i class="fas fa-bars m-3" onclick="toggleSideBar()"></i>
+			<div class="card-body">
+			<h2 class="text-center mb-3">Change Password</h2>
+			<div class="col-md-8 offset-md-2">
+			<form th:action="@{/user/change-password}" method="post">
+				<div class="form-group">
+		        	<input required type="password" name="oldPassword" id="oldPassword" class="form-control" placeholder="Enter old password">
+		      	</div>
+		      	
+		      	<div class="form-group">
+		        	<input required type="password" name="newPassword" id="newPassword" class="form-control" placeholder="Enter new password">
+		      	</div>
+				<div class="container text-center">
+					<button type="submit"  class="btn btn-success m-1">Change</button>
+				   	<button type="reset" class="btn btn-warning m-1">Reset</button>
+				</div>
+			</form>
+			</div>
+			</div>
+		</div>
+	<script>
+		$(document).ready(()=>{
+			$(".item").removeClass("activeTab");
+			$("#settings-link").addClass("activeTab");
+		})
+	</script>
+	</section>
+	
+	
+</body>
+</html>
