@@ -75,14 +75,14 @@ public class HomeController {
 			System.out.println(result);
 			
 			model.addAttribute("user",new User());
-			session.setAttribute("message", new Message("User registered succesfuly","alert-success"));
-			return "signup";
+			session.setAttribute("message", new Message("User registered succesfuly","success"));
+			return "redirect:/signin";
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("user",user);
-			session.setAttribute("message", new Message("Something went wrong "+ e.getMessage(),"alert-danger"));
-			return "signup";
+			session.setAttribute("message", new Message("Something went wrong "+ e.getMessage(),"danger"));
+			return "redirect:/signup";
 		}
 	}
 }

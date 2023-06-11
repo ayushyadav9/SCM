@@ -1,0 +1,28 @@
+version: "3"
+services:
+  smart-contact-manager:
+    container_name: smart-contact-manager
+    image: smart-contact-manager
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - MYSQL_HOST=dockermysql
+      - MYSQL_PORT=3306
+      - MYSQL_DB_NAME=smartcontact
+      - MYSQL_USERNAME=root
+      - MYSQL_PASSWORD=12521198Ayush@
+    depends_on:
+      - dockermysql
+
+  dockermysql:
+    container_name: dockermysql
+    image: mysql
+    ports:
+      - "3307:3306"
+    volumes:
+      - C:\Users\ayush\Desktop\db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=12521198Ayush@
+      - MYSQL_DATABASE=smartcontact  
+
